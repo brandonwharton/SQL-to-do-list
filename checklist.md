@@ -22,7 +22,7 @@ Front End
 
 
     Maybe: 
-    - [ ] Different buckets: Today, Tomorrow, by date?
+    - [ ] Different buckets nav bar: Today, Tomorrow, by date?
         - [ ] Default: All tasks
         - [ ] Display number of tasks?
         - [ ] Choose date
@@ -61,6 +61,7 @@ Database
     - [x] Name: weekend-to-do-app
     - [x] database.sql in repo
         - [x] CREATE TABLE
+            - [ ] update if more columns get added
         - [ ] Dummy data?
 
 
