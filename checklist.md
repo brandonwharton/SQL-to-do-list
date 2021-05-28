@@ -58,9 +58,9 @@ Style Ideas / Stretch
 
 
 Database
-    - [ ] Name: weekend-to-do-app
-    - [ ] database.sql in repo
-        - [ ] CREATE TABLE
+    - [x] Name: weekend-to-do-app
+    - [x] database.sql in repo
+        - [x] CREATE TABLE
         - [ ] Dummy data?
 
 
@@ -68,6 +68,8 @@ Mark as urgent default false
 Complete Default false
 
 Data Model
+
+table name: todo_list
 
 {
     id: id,
