@@ -1,7 +1,8 @@
 Front End
     - [ ] POST - Create a task
-        - [ ] Input method of some sort
-            - [ ] Urgent? Default to false, if then statement to make true? Or logic in server side?
+        - [x] Input method of some sort
+            - [ ] Urgent? 
+                - [ ] If then statement to make true? Or logic in server side?
         - [ ] AJAX call
         - [ ] then:
              - [ ] GET request for refresh page
@@ -38,6 +39,7 @@ Server Side
         - [ ] Sort by: Urgent, then DESC ID
     - [ ] PUT: Mark as Complete
     - [ ] DELETE: delete by ID
+    - [ ] OPTION: Router for routes
 
 
 
