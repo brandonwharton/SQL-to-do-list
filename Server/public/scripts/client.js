@@ -51,7 +51,22 @@ function renderList(taskArray) {
     });
 }
 
-// POST request to add a new task to todo_list on DB
+// Handle submit button logic before sending client data to POST route
 function handleSubmit() {
     console.log('clicked');
+    // hold data from client inputs
+    let newTask = $('#taskInput').val();
+    let isUrgent = $('#urgentInputCheckbox').prop('checked');
+    // create object to send to POST function
+    let taskToAdd = {
+        task: newTask,
+        urgent: isUrgent
+    };
+    console.log(taskToAdd);
+}
+
+
+// POST request to add a new task to todo_list on DB
+function submitNewTask (taskToAdd) {
+    
 }
