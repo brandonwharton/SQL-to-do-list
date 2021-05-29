@@ -15,7 +15,9 @@ function clickListeners() {
     // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
     $('#taskListDisplay').on('click', '.completeBtn', toggleComplete)
     // delete button listener CHANGE TARGET WHEN SWITCH FROM UL!!
-    $('#taskListDisplay').on('click', '.deleteBtn', deleteTask)    
+    $('#taskListDisplay').on('click', '.deleteBtn', deleteTask)
+    // urgent checkbox listener for inside task body
+    $('#taskListDisplay').on('click', '.urgentItemCheckbox', toggleUrgent);
 }
 
 
@@ -46,12 +48,19 @@ function renderList(taskArray) {
             <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">Complete Task</button>
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-            id="${taskItem.id}" data-id="${taskItem.id}">
-            <label class="form-check-label" for="${taskItem.id}">Make urgent?</label>
+            id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+            <label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>
             <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}">Delete Task</button>
         </li>
         `);
+
+        // check for urgency, change text of urgent input if already urgent
+        if (taskItem.urgent) {
+            // target label for specific item to change
+            $(`#label${taskItem.id}`).text('Remove urgency');
+        }
     });
+
 }
 
 // Handle submit button logic before sending client data to POST route
@@ -99,7 +108,7 @@ function toggleComplete() {
     // AJAX call to switch completeStatus to its opposite
     $.ajax({
         type: 'PUT',
-        url: `/tasks/${id}`,
+        url: `/tasks/complete/${id}`,
         data: {switchComplete: !completeStatus}
     }).then(response => {
         console.log('Received success message from server for complete PUT', response);
@@ -108,6 +117,28 @@ function toggleComplete() {
     }).catch(err => {
         // log an error if problem communicating with server
         alert('Something went wrong with complete PUT', err);
+    });
+}
+
+
+// PUT request to toggle the urgent property
+function toggleUrgent() {
+    // save id and complete status of clicked complete button
+    const id = $(this).data("id");
+    const urgentStatus = $(this).data("urgent");
+    console.log('Inside toggle urgent', id, urgentStatus);
+    // AJAX call to switch completeStatus to its opposite
+    $.ajax({
+        type: 'PUT',
+        url: `/tasks/urgent/${id}`,
+        data: {switchUrgent: !urgentStatus}
+    }).then(response => {
+        console.log('Received success message from server for urgent PUT', response);
+        // refresh DOM with updated data
+        getListData();
+    }).catch(err => {
+        // log an error if problem communicating with server
+        alert('Something went wrong with urgent PUT', err);
     });
 }
 

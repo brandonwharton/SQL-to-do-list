@@ -38,7 +38,7 @@ tasksRouter.post('/', (req, res) => {
 // PUT
 
 // route for toggling complete boolean
-tasksRouter.put('/:id', (req, res) => {
+tasksRouter.put('/complete/:id', (req, res) => {
     console.log('Inside complete PUT route', req.params.id, req.body);
     // query to change the complete status of a task to its opposite
     const queryText = `UPDATE "todo_list" SET "complete"=$1 WHERE "id"=$2;`
@@ -49,6 +49,22 @@ tasksRouter.put('/:id', (req, res) => {
         res.sendStatus(200);
     }).catch(err => {
         console.log('Error with PUT for complete in router', err);
+        res.sendStatus(500);
+    });
+})
+
+// route for toggling urgent boolean
+tasksRouter.put('/urgent/:id', (req, res) => {
+    console.log('Inside urgent PUT route', req.params.id, req.body);
+    // query to change the urgent status of a task to its opposite
+    const queryText = `UPDATE "todo_list" SET "urgent"=$1 WHERE "id"=$2;`
+    const values = [req.body.switchUrgent, req.params.id];
+    // PUT request to DB
+    pool.query(queryText, values).then(result => {
+        console.log('Successfully changed urgent');
+        res.sendStatus(200);
+    }).catch(err => {
+        console.log('Error with PUT for urgent in router', err);
         res.sendStatus(500);
     });
 })
