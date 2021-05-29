@@ -27,9 +27,13 @@ tasksRouter.post('/', (req, res) => {
     // send POST request to DB
     pool.query(queryText, values).then(result => {
         console.log('POST a task to DB from server');
-        
-    })
-})
+        // send a Created message back if successful
+        res.sendStatus(201);
+    }).catch(err => {
+        console.log('Error with POST in router', err);
+        res.sendStatus(500);
+    });
+});
 
 
 
