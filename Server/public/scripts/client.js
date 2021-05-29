@@ -114,6 +114,19 @@ function toggleComplete() {
 
 // DELETE request to remove a task from DB
 function deleteTask() {
-    console.log('Clicked delete');
-    
+    // save id and complete status of clicked complete button
+    const id = $(this).data("id");
+    console.log('Inside deleteTask', id);
+    // AJAX call to request a delete of the table row in DB
+    $.ajax({
+        type: 'DELETE',
+        url: `/tasks/${id}`
+    }).then(response => {
+        console.log('Received success message from server for DELETE', response);
+        // refresh DOM with updated data
+        getListData();
+    }).catch(err => {
+        // log an error if problem communicating with server
+        alert('Something went wrong with DELETE', err);
+    });   
 }
