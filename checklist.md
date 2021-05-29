@@ -35,8 +35,9 @@ Front End
 Server Side
     - [ ] POST Route: send task to database
         - [ ] Query body: 
-    - [ ] GET Route: retrieve data from database
-        - [ ] Sort by: Urgent, then DESC ID
+    - [x] GET Route: retrieve data from database
+        - [x] Sort by: Urgent, then DESC ID
+        - [ ] Figure out: completed on the bottom? 
     - [ ] PUT: Mark as Complete
     - [ ] DELETE: delete by ID
     - [ ] OPTION: Router for routes
