@@ -2,7 +2,7 @@ Front End
     - [ ] POST - Create a task
         - [x] Input method of some sort
         - [ ] Urgent? 
-            - [ ] If then statement to make true? Or logic in server side?
+            - [ ] If then statement to make true
             - [ ] hide "mark urgent" if form has no text, jquery change()?  
         - [ ] AJAX call
         - [ ] then:
@@ -23,6 +23,7 @@ Front End
             - [ ] DOM refresh
             - [ ] SweetAlert: are you sure?
         - [ ] Urgent? 
+            - [ ] Turn into a button in list items for toggle?
             - [ ] If then statement to make true? Or logic in server side?
             - [ ] hide "mark urgent" if form has no text, jquery change()?
             - [ ] DOM refresh      
