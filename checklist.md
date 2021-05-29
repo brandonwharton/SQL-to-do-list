@@ -30,6 +30,7 @@ Front End
 
     - [ ] DELETE request
         - [ ] Use SweetAlert: are you sure?
+        - [ ] Bootstrap trash icon
 
 
     Maybe: 

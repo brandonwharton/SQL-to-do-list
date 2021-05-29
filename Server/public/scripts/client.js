@@ -14,7 +14,8 @@ function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
     // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
     $('#taskListDisplay').on('click', '.completeBtn', toggleComplete)
-    
+    // delete button listener CHANGE TARGET WHEN SWITCH FROM UL!!
+    $('#taskListDisplay').on('click', '.deleteBtn', deleteTask)    
 }
 
 
@@ -108,4 +109,24 @@ function toggleComplete() {
         // log an error if problem communicating with server
         alert('Something went wrong with complete PUT', err);
     });
+}
+
+
+// DELETE request to remove a task from DB
+function deleteTask() {
+    // save id and complete status of clicked complete button
+    const id = $(this).data("id");
+    console.log('Inside deleteTask', id);
+    // AJAX call to request a delete of the table row in DB
+    $.ajax({
+        type: 'DELETE',
+        url: `/tasks/${id}`
+    }).then(response => {
+        console.log('Received success message from server for DELETE', response);
+        // refresh DOM with updated data
+        getListData();
+    }).catch(err => {
+        // log an error if problem communicating with server
+        alert('Something went wrong with DELETE', err);
+    });   
 }
