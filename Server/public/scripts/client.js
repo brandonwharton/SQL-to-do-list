@@ -6,9 +6,18 @@ function handleReady() {
     console.log('jQuery running');
     // populate existing list on load
     getListData();
+    // set up click listeners
+    clickListeners();
 }
 
-// GET request
+function clickListeners() {
+    $('#submitTaskBtn').on('click', handleSubmit)
+}
+
+
+
+
+// GET request to pull todo_list table data from DB
 function getListData() {
     // AJAX call to server
     $.ajax({
@@ -40,4 +49,9 @@ function renderList(taskArray) {
         </li>
         `);
     });
+}
+
+// POST request to add a new task to todo_list on DB
+function handleSubmit() {
+    console.log('clicked');
 }
