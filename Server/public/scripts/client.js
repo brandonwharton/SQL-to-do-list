@@ -62,11 +62,22 @@ function handleSubmit() {
         task: newTask,
         urgent: isUrgent
     };
-    console.log(taskToAdd);
+    // run submitNewTask with saved object
+    submitNewTask(taskToAdd);
 }
 
 
 // POST request to add a new task to todo_list on DB
 function submitNewTask (taskToAdd) {
-    
+    $.ajax({
+        method: 'POST',
+        url: '/tasks',
+        data: taskToAdd
+    }).then(response => {
+        console.log('Recieved success message from server for POST', response);
+        // refresh DOM with new data
+        getListData();
+    }).catch(err => {
+        console.log('Something went wrong with POST from client', err);
+    });
 }
