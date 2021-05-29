@@ -48,12 +48,19 @@ function renderList(taskArray) {
             <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">Complete Task</button>
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-            id="${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
-            <label class="form-check-label" for="${taskItem.id}">Make urgent?</label>
+            id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+            <label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>
             <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}">Delete Task</button>
         </li>
         `);
+
+        // check for urgency, change text of urgent input if already urgent
+        if (taskItem.urgent) {
+            // target label for specific item to change
+            $(`#label${taskItem.id}`).text('Remove urgency');
+        }
     });
+
 }
 
 // Handle submit button logic before sending client data to POST route
