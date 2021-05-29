@@ -14,7 +14,8 @@ function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
     // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
     $('#taskListDisplay').on('click', '.completeBtn', toggleComplete)
-    
+    // delete button listener CHANGE TARGET WHEN SWITCH FROM UL!!
+    $('#taskListDisplay').on('click', '.deleteBtn', deleteTask)    
 }
 
 
@@ -108,4 +109,11 @@ function toggleComplete() {
         // log an error if problem communicating with server
         alert('Something went wrong with complete PUT', err);
     });
+}
+
+
+// DELETE request to remove a task from DB
+function deleteTask() {
+    console.log('Clicked delete');
+    
 }
