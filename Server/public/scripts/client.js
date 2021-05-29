@@ -15,7 +15,9 @@ function clickListeners() {
     // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
     $('#taskListDisplay').on('click', '.completeBtn', toggleComplete)
     // delete button listener CHANGE TARGET WHEN SWITCH FROM UL!!
-    $('#taskListDisplay').on('click', '.deleteBtn', deleteTask)    
+    $('#taskListDisplay').on('click', '.deleteBtn', deleteTask)
+    // urgent checkbox listener for inside task body
+    $('#taskListDisplay').on('click', '.urgentItemCheckbox', toggleUrgent);
 }
 
 
@@ -46,7 +48,7 @@ function renderList(taskArray) {
             <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">Complete Task</button>
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-            id="${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}>
+            id="${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
             <label class="form-check-label" for="${taskItem.id}">Make urgent?</label>
             <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}">Delete Task</button>
         </li>
