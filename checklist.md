@@ -17,7 +17,6 @@ Front End
     - [] PUT request
         - [ ] Complete
             - [x] Use !complete? Make it a toggle
-            - [ ] Checkbox spawns it?
             - [ ] Strikethrough/Background color change?
                   - [ ] Task Completed!!
             - [x] DOM refresh
