@@ -1,22 +1,32 @@
 Front End
     - [ ] POST - Create a task
         - [x] Input method of some sort
-            - [ ] Urgent? 
-                - [ ] If then statement to make true? Or logic in server side?
+        - [ ] Urgent? 
+            - [ ] If then statement to make true? Or logic in server side?
+            - [ ] hide "mark urgent" if form has no text, jquery change()?  
         - [ ] AJAX call
         - [ ] then:
              - [ ] GET request for refresh page
-    - [ ] GET 
-        - [ ] AJAX call
-        - [ ] Append information
+    - [x] GET 
+        - [x] AJAX call
+        - [x] Append information
+            - [x] task
+            - [x] mark as urgent
+            - [x] complete button
   
     - [ ] PUT request
         - [ ] Complete
             - [ ] Use !complete? Make it a toggle
             - [ ] Checkbox spawns it?
             - [ ] Strikethrough/Background color change?
-            
-                - [ ] Task Completed!!
+                  - [ ] Task Completed!!
+            - [ ] DOM refresh
+            - [ ] SweetAlert: are you sure?
+        - [ ] Urgent? 
+            - [ ] If then statement to make true? Or logic in server side?
+            - [ ] hide "mark urgent" if form has no text, jquery change()?
+            - [ ] DOM refresh      
+
 
     - [ ] DELETE request
         - [ ] Use SweetAlert: are you sure?
@@ -35,8 +45,9 @@ Front End
 Server Side
     - [ ] POST Route: send task to database
         - [ ] Query body: 
-    - [ ] GET Route: retrieve data from database
-        - [ ] Sort by: Urgent, then DESC ID
+    - [x] GET Route: retrieve data from database
+        - [x] Sort by: Urgent, then DESC ID
+        - [ ] Figure out: completed on the bottom? 
     - [ ] PUT: Mark as Complete
     - [ ] DELETE: delete by ID
     - [ ] OPTION: Router for routes
