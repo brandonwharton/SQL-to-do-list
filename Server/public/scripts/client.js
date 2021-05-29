@@ -14,6 +14,7 @@ function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
     // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
     $('#taskListDisplay').on('click', '.completeBtn', toggleComplete)
+    
 }
 
 
@@ -45,7 +46,8 @@ function renderList(taskArray) {
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
             id="${taskItem.id}" data-id="${taskItem.id}">
-            <label class="form-check-label" for="${taskItem.id}">Make urgent?</label>  
+            <label class="form-check-label" for="${taskItem.id}">Make urgent?</label>
+            <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}">Delete Task</button>
         </li>
         `);
     });
