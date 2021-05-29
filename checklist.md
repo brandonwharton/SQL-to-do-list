@@ -3,12 +3,16 @@ Front End
         - [x] Input method of some sort
             - [ ] Urgent? 
                 - [ ] If then statement to make true? Or logic in server side?
+                - [ ] hide "mark urgent" if form has no text, jquery change()?
         - [ ] AJAX call
         - [ ] then:
              - [ ] GET request for refresh page
-    - [ ] GET 
-        - [ ] AJAX call
+    - [x] GET 
+        - [x] AJAX call
         - [ ] Append information
+            - [ ] task
+            - [ ] mark as urgent
+            - [ ] complete button
   
     - [ ] PUT request
         - [ ] Complete

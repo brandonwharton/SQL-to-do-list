@@ -15,13 +15,27 @@ function getListData() {
         method: 'GET',
         url: '/tasks'
     }).then(response => {
-        console.log(response);
+        // render task list to DOM upon retrieval
+        renderList(response);
     }).catch(err => {
         // log an error if problem communicating with server
         console.log('Something went wrong with GET request', err);
     })
 }
 
-function renderList(tasks) {
-
+function renderList(taskArray) {
+    // target list to display
+    let el = $('#taskListDisplay');
+    // empty 
+    el.empty();
+    // append all tasks to DOM in order received from DB
+    taskArray.forEach(taskItem => {
+        el.append(`
+        <li>${taskItem.task}
+                <input class="form-check-input urgentItemCheckbox" type="checkbox" 
+                id="${taskItem.id}" data-id="${taskItem.id}">
+                <label class="form-check-label" for="${taskItem.id}">Mark as urgent?</label>  
+        </li>
+        `);
+    });
 }
