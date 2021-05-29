@@ -31,10 +31,13 @@ function renderList(taskArray) {
     // append all tasks to DOM in order received from DB
     taskArray.forEach(taskItem => {
         el.append(`
-        <li>${taskItem.task}
-                <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-                id="${taskItem.id}" data-id="${taskItem.id}">
-                <label class="form-check-label" for="${taskItem.id}">Mark as urgent?</label>  
+        
+        <li>
+            <button type="button" class="btn btn-success completeBtn" data-id="${tastItem.id}>Complete Task</button>
+            ${taskItem.task}
+            <input class="form-check-input urgentItemCheckbox" type="checkbox" 
+            id="${taskItem.id}" data-id="${taskItem.id}">
+            <label class="form-check-label" for="${taskItem.id}">Make urgent?</label>  
         </li>
         `);
     });

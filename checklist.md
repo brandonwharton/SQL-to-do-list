@@ -1,26 +1,32 @@
 Front End
     - [ ] POST - Create a task
         - [x] Input method of some sort
-            - [ ] Urgent? 
-                - [ ] If then statement to make true? Or logic in server side?
-                - [ ] hide "mark urgent" if form has no text, jquery change()?
+        - [ ] Urgent? 
+            - [ ] If then statement to make true? Or logic in server side?
+            - [ ] hide "mark urgent" if form has no text, jquery change()?  
         - [ ] AJAX call
         - [ ] then:
              - [ ] GET request for refresh page
     - [x] GET 
         - [x] AJAX call
-        - [ ] Append information
-            - [ ] task
-            - [ ] mark as urgent
-            - [ ] complete button
+        - [x] Append information
+            - [x] task
+            - [x] mark as urgent
+            - [x] complete button
   
     - [ ] PUT request
         - [ ] Complete
             - [ ] Use !complete? Make it a toggle
             - [ ] Checkbox spawns it?
             - [ ] Strikethrough/Background color change?
-            
-                - [ ] Task Completed!!
+                  - [ ] Task Completed!!
+            - [ ] DOM refresh
+            - [ ] SweetAlert: are you sure?
+        - [ ] Urgent? 
+            - [ ] If then statement to make true? Or logic in server side?
+            - [ ] hide "mark urgent" if form has no text, jquery change()?
+            - [ ] DOM refresh      
+
 
     - [ ] DELETE request
         - [ ] Use SweetAlert: are you sure?
