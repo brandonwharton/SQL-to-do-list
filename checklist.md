@@ -39,8 +39,10 @@ Front End
         - [ ] Display number of tasks?
         - [ ] Choose date
         - [ ] Drag to different areas?
-        - [ ] 
-
+    - [ ] Separate area below for complete tasks
+        - [ ] Strikethrough?
+        - [ ] Animation: background color change few seconds, then move to complete area?
+    - [ ] Separate area above for urgent task
 
 
 Server Side
@@ -49,7 +51,7 @@ Server Side
     - [x] GET Route: retrieve data from database
         - [x] Sort by: Urgent, then DESC ID
         - [ ] Figure out: completed on the bottom? 
-    - [ ] PUT: Mark as Complete
+    - [x] PUT: Mark as Complete
     - [ ] DELETE: delete by ID
     - [ ] OPTION: Router for routes
 
