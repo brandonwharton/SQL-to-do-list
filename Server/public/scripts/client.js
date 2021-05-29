@@ -11,10 +11,10 @@ function handleReady() {
 }
 
 function clickListeners() {
-    $('#submitTaskBtn').on('click', handleSubmit)
+    $('#submitTaskBtn').on('click', handleSubmit);
+    // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
+    $('#taskListDisplay').on('click', '.completeBtn', toggleComplete)
 }
-
-
 
 
 // GET request to pull todo_list table data from DB
@@ -28,7 +28,7 @@ function getListData() {
         renderList(response);
     }).catch(err => {
         // log an error if problem communicating with server
-        console.log('Something went wrong with GET request', err);
+        alert('Something went wrong with GET request', err);
     })
 }
 
@@ -41,7 +41,7 @@ function renderList(taskArray) {
     taskArray.forEach(taskItem => {
         el.append(`
         <li>
-            <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}">Complete Task</button>
+            <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">Complete Task</button>
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
             id="${taskItem.id}" data-id="${taskItem.id}">
@@ -78,6 +78,29 @@ function submitNewTask (taskToAdd) {
         // refresh DOM with new data
         getListData();
     }).catch(err => {
-        console.log('Something went wrong with POST from client', err);
+        // log an error if problem communicating with server
+        alert('Something went wrong with POST from client', err);
+    });
+}
+
+
+// PUT request to mark a task as complete
+function toggleComplete() {
+    // save id and complete status of clicked complete button
+    const id = $(this).data("id");
+    const completeStatus = $(this).data("complete");
+    console.log('Inside toggle complete', id, completeStatus);
+    // AJAX call to switch completeStatus to its opposite
+    $.ajax({
+        type: 'PUT',
+        url: '/tasks',
+        data: {switchComplete: !completeStatus}
+    }).then(response => {
+        console.log('Received success message from server for complete PUT', response);
+        // refresh DOM with updated data
+        getListData();
+    }).catch(err => {
+        // log an error if problem communicating with server
+        alert('Something went wrong with complete PUT', err);
     });
 }

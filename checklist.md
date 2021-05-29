@@ -1,12 +1,12 @@
 Front End
     - [ ] POST - Create a task
         - [x] Input method of some sort
-        - [ ] Urgent? 
-            - [ ] If then statement to make true
+        - [x] Urgent? 
+            - [x] .prop() jquery method
             - [ ] hide "mark urgent" if form has no text, jquery change()?  
-        - [ ] AJAX call
-        - [ ] then:
-             - [ ] GET request for refresh page
+        - [x] AJAX call
+        - [x] then:
+             - [x] GET request for refresh page
     - [x] GET 
         - [x] AJAX call
         - [x] Append information
@@ -44,7 +44,7 @@ Front End
 
 
 Server Side
-    - [ ] POST Route: send task to database
+    - [x] POST Route: send task to database
         - [ ] Query body: 
     - [x] GET Route: retrieve data from database
         - [x] Sort by: Urgent, then DESC ID
