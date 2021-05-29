@@ -38,7 +38,7 @@ tasksRouter.post('/', (req, res) => {
 // PUT
 
 // route for toggling complete boolean
-tasksRouter.put('/:id', (req, res) => {
+tasksRouter.put('/complete/:id', (req, res) => {
     console.log('Inside complete PUT route', req.params.id, req.body);
     // query to change the complete status of a task to its opposite
     const queryText = `UPDATE "todo_list" SET "complete"=$1 WHERE "id"=$2;`

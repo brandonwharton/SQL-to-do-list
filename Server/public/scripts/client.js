@@ -46,7 +46,7 @@ function renderList(taskArray) {
             <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">Complete Task</button>
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-            id="${taskItem.id}" data-id="${taskItem.id}">
+            id="${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}>
             <label class="form-check-label" for="${taskItem.id}">Make urgent?</label>
             <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}">Delete Task</button>
         </li>
@@ -99,7 +99,7 @@ function toggleComplete() {
     // AJAX call to switch completeStatus to its opposite
     $.ajax({
         type: 'PUT',
-        url: `/tasks/${id}`,
+        url: `/tasks/complete/${id}`,
         data: {switchComplete: !completeStatus}
     }).then(response => {
         console.log('Received success message from server for complete PUT', response);
@@ -108,6 +108,28 @@ function toggleComplete() {
     }).catch(err => {
         // log an error if problem communicating with server
         alert('Something went wrong with complete PUT', err);
+    });
+}
+
+
+// PUT request to toggle the urgent property
+function toggleUrgent() {
+    // save id and complete status of clicked complete button
+    const id = $(this).data("id");
+    const urgentStatus = $(this).data("urgent");
+    console.log('Inside toggle urgent', id, urgentStatus);
+    // AJAX call to switch completeStatus to its opposite
+    $.ajax({
+        type: 'PUT',
+        url: `/tasks/urgent/${id}`,
+        data: {switchUrgent: !urgentStatus}
+    }).then(response => {
+        console.log('Received success message from server for urgent PUT', response);
+        // refresh DOM with updated data
+        getListData();
+    }).catch(err => {
+        // log an error if problem communicating with server
+        alert('Something went wrong with urgent PUT', err);
     });
 }
 
