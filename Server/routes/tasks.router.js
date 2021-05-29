@@ -55,6 +55,23 @@ tasksRouter.put('/:id', (req, res) => {
 
 
 
+// DELETE
+// route for deleting a chosen table row on DB
+tasksRouter.delete('/:id', (req, res) => {
+    console.log('Inside DELETE route', req.params.id);
+    // query to delete a row
+    const queryText = `DELETE FROM "todo_list" WHERE "id"=$1;`
+    const value = [req.params.id];
+    // PUT request to DB
+    pool.query(queryText, value).then(result => {
+        console.log('Successfully deleted a task');
+        res.sendStatus(200);
+    }).catch(err => {
+        console.log('Error with DELETE in router', err);
+        res.sendStatus(500);
+    });
+})
+
 
 
 
