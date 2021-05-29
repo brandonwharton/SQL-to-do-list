@@ -35,6 +35,14 @@ tasksRouter.post('/', (req, res) => {
     });
 });
 
+// PUT
+
+// route for toggling complete boolean
+tasksRouter.put('/:id', (req, res) => {
+    console.log('Inside complete PUT route', req.params.id, req.body);
+    res.sendStatus(200);
+})
+
 
 
 

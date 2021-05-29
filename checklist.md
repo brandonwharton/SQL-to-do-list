@@ -14,13 +14,13 @@ Front End
             - [x] mark as urgent
             - [x] complete button
   
-    - [ ] PUT request
+    - [] PUT request
         - [ ] Complete
-            - [ ] Use !complete? Make it a toggle
+            - [x] Use !complete? Make it a toggle
             - [ ] Checkbox spawns it?
             - [ ] Strikethrough/Background color change?
                   - [ ] Task Completed!!
-            - [ ] DOM refresh
+            - [x] DOM refresh
             - [ ] SweetAlert: are you sure?
         - [ ] Urgent? 
             - [ ] Turn into a button in list items for toggle?

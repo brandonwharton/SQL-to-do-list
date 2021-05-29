@@ -93,7 +93,7 @@ function toggleComplete() {
     // AJAX call to switch completeStatus to its opposite
     $.ajax({
         type: 'PUT',
-        url: '/tasks',
+        url: `/tasks/${id}`,
         data: {switchComplete: !completeStatus}
     }).then(response => {
         console.log('Received success message from server for complete PUT', response);
