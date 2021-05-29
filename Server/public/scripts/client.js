@@ -64,6 +64,9 @@ function handleSubmit() {
     };
     // run submitNewTask with saved object
     submitNewTask(taskToAdd);
+    // reset input values
+    $('#taskInput').val('');
+    $('#urgentInputCheckbox').prop('checked', false);
 }
 
 
