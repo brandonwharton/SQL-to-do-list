@@ -13,11 +13,11 @@ function handleReady() {
 function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
     // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
-    $('#taskListDisplay').on('click', '.completeBtn', toggleComplete)
+    $('#listDisplay').on('click', '.completeBtn', toggleComplete)
     // delete button listener CHANGE TARGET WHEN SWITCH FROM UL!!
-    $('#taskListDisplay').on('click', '.deleteBtn', deleteTask)
+    $('#listDisplay').on('click', '.deleteBtn', deleteTask)
     // urgent checkbox listener for inside task body
-    $('#taskListDisplay').on('click', '.urgentItemCheckbox', toggleUrgent);
+    $('#listDisplay').on('click', '.urgentItemCheckbox', toggleUrgent);
 }
 
 
@@ -37,28 +37,36 @@ function getListData() {
 }
 
 function renderList(taskArray) {
-    // target list to display
-    let el = $('#taskListDisplay');
-    // empty 
-    el.empty();
+    // empty current lists
+    $('#urgentListDisplay').empty();
+    $('#otherListDisplay').empty();
     // append all tasks to DOM in order received from DB
     taskArray.forEach(taskItem => {
-        el.append(`
+        let urgency;
+        let labelText;
+        if (taskItem.urgent) {
+            urgency = 'urgent';
+            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Remove urgency</label>`
+        } else {
+            urgency = 'other';
+            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>`
+        }
+        $(`#${urgency}ListDisplay`).append(`
         <li>
             <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">Complete Task</button>
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
             id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
-            <label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>
+            ${labelText}
             <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}">Delete Task</button>
         </li>
         `);
 
         // check for urgency, change text of urgent input if already urgent
-        if (taskItem.urgent) {
-            // target label for specific item to change
-            $(`#label${taskItem.id}`).text('Remove urgency');
-        }
+        // if (taskItem.urgent) {
+        //     // target label for specific item to change
+        //     $(`#label${taskItem.id}`).text('Remove urgency');
+        // }
     });
 
 }
