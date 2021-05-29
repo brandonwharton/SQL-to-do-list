@@ -1,12 +1,12 @@
 Front End
     - [ ] POST - Create a task
         - [x] Input method of some sort
-        - [ ] Urgent? 
-            - [ ] If then statement to make true
+        - [x] Urgent? 
+            - [x] .prop() jquery method
             - [ ] hide "mark urgent" if form has no text, jquery change()?  
-        - [ ] AJAX call
-        - [ ] then:
-             - [ ] GET request for refresh page
+        - [x] AJAX call
+        - [x] then:
+             - [x] GET request for refresh page
     - [x] GET 
         - [x] AJAX call
         - [x] Append information
@@ -14,13 +14,13 @@ Front End
             - [x] mark as urgent
             - [x] complete button
   
-    - [ ] PUT request
+    - [] PUT request
         - [ ] Complete
-            - [ ] Use !complete? Make it a toggle
+            - [x] Use !complete? Make it a toggle
             - [ ] Checkbox spawns it?
             - [ ] Strikethrough/Background color change?
                   - [ ] Task Completed!!
-            - [ ] DOM refresh
+            - [x] DOM refresh
             - [ ] SweetAlert: are you sure?
         - [ ] Urgent? 
             - [ ] Turn into a button in list items for toggle?
@@ -39,17 +39,19 @@ Front End
         - [ ] Display number of tasks?
         - [ ] Choose date
         - [ ] Drag to different areas?
-        - [ ] 
-
+    - [ ] Separate area below for complete tasks
+        - [ ] Strikethrough?
+        - [ ] Animation: background color change few seconds, then move to complete area?
+    - [ ] Separate area above for urgent task
 
 
 Server Side
-    - [ ] POST Route: send task to database
+    - [x] POST Route: send task to database
         - [ ] Query body: 
     - [x] GET Route: retrieve data from database
         - [x] Sort by: Urgent, then DESC ID
         - [ ] Figure out: completed on the bottom? 
-    - [ ] PUT: Mark as Complete
+    - [x] PUT: Mark as Complete
     - [ ] DELETE: delete by ID
     - [ ] OPTION: Router for routes
 
