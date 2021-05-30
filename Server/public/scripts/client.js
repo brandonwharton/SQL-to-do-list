@@ -27,14 +27,15 @@ function eventListeners() {
 
 // GET request to pull todo_list table data from DB
 function getListData(orderRequest) {
+    // set a default order request if none is provided
     if (!orderRequest) {
-        console.log('No order input, is it still working?');
-        
+        orderRequest = 'ASC';
+        console.log('No request originally, default', orderRequest); 
     }
     // AJAX call to server
     $.ajax({
         method: 'GET',
-        url: '/tasks'
+        url: `/tasks?order=${orderRequest}`
     }).then(response => {
         // render task list to DOM upon retrieval
         renderList(response);
@@ -97,7 +98,8 @@ function renderList(taskArray) {
 
 // Handle request for an order change
 function orderChangeRequest() {
-    console.log($(this).val());
+    let orderRequest = $(this).val();
+    getListData(orderRequest);
 }
 
 
