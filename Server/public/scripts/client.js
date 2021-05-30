@@ -9,11 +9,14 @@ function handleReady() {
     // populate existing list on load
     getListData();
     // set up click listeners
-    clickListeners();
+    eventListeners();
 }
 
-function clickListeners() {
+function eventListeners() {
+    // submit button
     $('#submitTaskBtn').on('click', handleSubmit);
+    // ordering change request
+    $('#orderRequest').on('change', orderChangeRequest)
     // buttons inside task divs
     $('#listDisplay').on('click', '.completeBtn', handleComplete)
     $('#listDisplay').on('click', '.urgentBtn', toggleUrgent);
@@ -23,11 +26,16 @@ function clickListeners() {
 
 
 // GET request to pull todo_list table data from DB
-function getListData() {
+function getListData(orderRequest) {
+    // set a default order request if none is provided
+    if (!orderRequest) {
+        orderRequest = 'ASC';
+    }
     // AJAX call to server
     $.ajax({
         method: 'GET',
-        url: '/tasks'
+        // send an order query based on user input
+        url: `/tasks?order=${orderRequest}`
     }).then(response => {
         // render task list to DOM upon retrieval
         renderList(response);
@@ -37,6 +45,7 @@ function getListData() {
     })
 }
 
+// Render DOM
 function renderList(taskArray) {
     // empty current lists
     $('#urgentListDisplay').empty();
@@ -86,6 +95,12 @@ function renderList(taskArray) {
         }
 
     });
+}
+
+// Handle request for an order change
+function orderChangeRequest() {
+    let orderRequest = $(this).val();
+    getListData(orderRequest);
 }
 
 
