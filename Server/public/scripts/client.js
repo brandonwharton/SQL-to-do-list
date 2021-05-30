@@ -58,11 +58,11 @@ function renderList(taskArray) {
         $(`#${urgency}ListDisplay`).append(`
         <div class="border rounded row ${urgency} row${taskItem.id}">
             <div class="col">
-                <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
+                <button type="button" class="btn btn-success completeBtn completeBtn${taskItem.id}" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
                     <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-success urgentBtn" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+                <button type="button" class="btn btn-success urgentBtn urgentBtn${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
                     <img src="./vendors/bootstrap-svg/exclamation-lg.svg" alt="Urgent"></button>
             </div>
             <div class="col">
@@ -74,10 +74,13 @@ function renderList(taskArray) {
         </div>
         `);
 
-        // add a completed class to anything marked as completed
+        // add/remove properties to completed tasks
         if (taskItem.complete) {
+            // Add the complete class for styling of completed task divs
             $(`.row${taskItem.id}`).addClass('complete');
-            
+            // remove the complete and urgent buttons from completed tasks
+            $(`.completeBtn${taskItem.id}`).remove();
+            $(`.urgentBtn${taskItem.id}`).remove();
         }
 
     });
