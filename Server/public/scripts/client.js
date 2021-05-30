@@ -1,3 +1,5 @@
+
+
 console.log('JS Running');
 
 $(handleReady);
@@ -12,12 +14,11 @@ function handleReady() {
 
 function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
-    // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
-    $('#listDisplay').on('click', '.completeBtn', toggleComplete)
-    // delete button listener CHANGE TARGET WHEN SWITCH FROM UL!!
-    $('#listDisplay').on('click', '.deleteBtn', deleteTask)
-    // urgent checkbox listener for inside task body
-    $('#listDisplay').on('click', '.urgentItemCheckbox', toggleUrgent);
+    // buttons inside task divs
+    $('#listDisplay').on('click', '.completeBtn', handleComplete)
+    $('#listDisplay').on('click', '.urgentBtn', toggleUrgent);
+    $('#listDisplay').on('click', '.deleteBtn', handleDelete)
+
 }
 
 
@@ -57,51 +58,74 @@ function renderList(taskArray) {
 
         // append lists to DOM
         $(`#${urgency}ListDisplay`).append(`
-        <div class="border rounded row ${urgency}">
+        <div class="border rounded row ${urgency} row${taskItem.id}">
             <div class="col">
-                <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
+                <button type="button" class="btn btn-success completeBtn completeBtn${taskItem.id}" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
                     <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             </div>
             <div class="col">
-                <button type="button" class="btn deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+                <button type="button" class="btn btn-success urgentBtn urgentBtn${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+                    <img src="./vendors/bootstrap-svg/exclamation-lg.svg" alt="Urgent"></button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
             </div>
             <div class="col-8 ${urgency}Task">
                 ${taskItem.task}
             </div>
-            <div class="col">
-                <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-                id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
-                ${labelText}
-            </div>
-
         </div>
         `);
 
-        // add a completed class to anything marked as completed
+        // add/remove properties to completed tasks
         if (taskItem.complete) {
-
+            // Add the complete class for styling of completed task divs
+            $(`.row${taskItem.id}`).addClass('complete');
+            // remove the complete and urgent buttons from completed tasks
+            $(`.completeBtn${taskItem.id}`).remove();
+            $(`.urgentBtn${taskItem.id}`).remove();
         }
 
     });
-
 }
+
 
 // Handle submit button logic before sending client data to POST route
 function handleSubmit() {
     console.log('clicked');
-    // hold data from client inputs
-    let newTask = $('#taskInput').val();
-    let isUrgent = $('#urgentInputCheckbox').prop('checked');
-    // create object to send to POST function
-    let taskToAdd = {
-        task: newTask,
-        urgent: isUrgent
-    };
-    // run submitNewTask with saved object
-    submitNewTask(taskToAdd);
-    // reset input values
-    $('#taskInput').val('');
-    $('#urgentInputCheckbox').prop('checked', false);
+    urgencyPopup();
+}
+
+function urgencyPopup() {
+    // SweetAlert popup on a click
+    swal({
+        title: 'Mark this task as urgent?',
+        text: 'Urgent tasks will appear as a higher priority than non-urgent tasks. This can be changed later.',
+        icon: 'info',
+        dangerMode: true,
+        buttons: {
+            cancel: {
+                text: `Task isn't urgent`,
+                value: false,
+                visible: true
+            },
+            confirm: {
+                text: `Make task urgent`,
+                value: true,
+            }
+        }
+    }).then( function (value) {
+        // set the text body of the task to be added
+        let newTask = $('#taskInput').val();
+        // create the task object with the text body and the value based on button clicked
+        let taskToAdd = {
+            task: newTask,
+            urgent: value
+        };
+        // run submitNewTask with saved object
+        submitNewTask(taskToAdd);
+        // clear input
+        $('#taskInput').val('');
+    })
 }
 
 
@@ -123,23 +147,39 @@ function submitNewTask (taskToAdd) {
 
 
 // PUT request to mark a task as complete
-function toggleComplete() {
+function handleComplete() {
     // save id and complete status of clicked complete button
     const id = $(this).data("id");
     const completeStatus = $(this).data("complete");
     console.log('Inside toggle complete', id, completeStatus);
-    // AJAX call to switch completeStatus to its opposite
-    $.ajax({
-        type: 'PUT',
-        url: `/tasks/complete/${id}`,
-        data: {switchComplete: !completeStatus}
-    }).then(response => {
-        console.log('Received success message from server for complete PUT', response);
-        // refresh DOM with updated data
-        getListData();
-    }).catch(err => {
-        // log an error if problem communicating with server
-        alert('Something went wrong with complete PUT', err);
+    // run SweetAlert function with saved values as a popup to handle AJAX call
+    completeTaskPopup(id, completeStatus);
+}
+
+function completeTaskPopup(id, completeStatus) {
+    swal({
+        title: 'Check this task off your checklist?',
+        icon: 'info',
+        buttons: true
+    }).then(function (checkedOff) {
+        if(checkedOff) {
+            swal('You accomplished something on your to-do list! Way to go!', {
+                icon: 'success'
+            })
+            // AJAX call to switch completeStatus to its opposite
+            $.ajax({
+                type: 'PUT',
+                url: `/tasks/complete/${id}`,
+                data: {switchComplete: !completeStatus}
+            }).then(response => {
+                console.log('Received success message from server for complete PUT', response);
+                // refresh DOM with updated data
+                getListData();
+            }).catch(err => {
+             // log an error if problem communicating with server
+            alert('Something went wrong with complete PUT', err);
+            });
+        }
     });
 }
 
@@ -167,20 +207,39 @@ function toggleUrgent() {
 
 
 // DELETE request to remove a task from DB
-function deleteTask() {
+function handleDelete() {
     // save id and complete status of clicked complete button
     const id = $(this).data("id");
     console.log('Inside deleteTask', id);
-    // AJAX call to request a delete of the table row in DB
-    $.ajax({
-        type: 'DELETE',
-        url: `/tasks/${id}`
-    }).then(response => {
-        console.log('Received success message from server for DELETE', response);
-        // refresh DOM with updated data
-        getListData();
-    }).catch(err => {
-        // log an error if problem communicating with server
-        alert('Something went wrong with DELETE', err);
-    });   
+    // call deletePopup with the saved id
+    deleteTaskPopup(id);
+}
+
+// p
+function deleteTaskPopup(id) {
+    swal({
+        title: 'Are you sure you want to delete this task?',
+        text: 'This cannot be undone',
+        icon: 'warning',
+        dangerMode: true,
+        buttons: [true, 'Delete']
+    }).then(function (choseDelete) {
+        if(choseDelete) {
+            swal('Task has been removed from your to-do list.', {
+                icon: 'success'
+            })
+            // AJAX call to request a delete of the table row in DB
+            $.ajax({
+                type: 'DELETE',
+                url: `/tasks/${id}`
+            }).then(response => {
+                console.log('Received success message from server for DELETE', response);
+                // refresh DOM with updated data
+                getListData();
+            }).catch(err => {
+                // log an error if problem communicating with server
+                alert('Something went wrong with DELETE', err);
+            });   
+        }
+    });
 }
