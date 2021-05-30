@@ -99,24 +99,10 @@ ${labelText} */}
 function handleSubmit() {
     console.log('clicked');
     urgencyPopup();
-    // // hold data from client inputs
-    // let newTask = $('#taskInput').val();
-    // // SweetAlert popup to check for urgency of submitted task
-    // let isUrgent = urgencyPopup();
-    // console.log(isUrgent);
-    
-    // // create object to send to POST function
-    // let taskToAdd = {
-    //     task: newTask,
-    //     urgent: isUrgent
-    // };
-    // // run submitNewTask with saved object
-    // submitNewTask(taskToAdd);
-    // reset input values
-    // $('#taskInput').val('');
 }
 
 function urgencyPopup() {
+    // SweetAlert popup on a click
     swal({
         title: 'Mark this task as urgent?',
         text: 'Urgent tasks will appear as a higher priority than non-urgent tasks. This can be changed later.',
