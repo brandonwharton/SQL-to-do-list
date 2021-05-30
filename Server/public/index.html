@@ -20,7 +20,18 @@
     </header>
     <main>
         <section id="listDisplay" class="container">
-            <h3>Urgent Tasks</h3>
+            <div class="row">
+                <div class="col">
+                    <h3>Urgent Tasks</h3>
+                </div>
+                <div class="col">
+                    <select name="orderRequest" id="orderRequest" class="orderRequestGroup">
+                        <option value="oldest">Oldest first (default)</option>
+                        <option value="newest">Newest first</option>
+                    </select>
+                    <label for="orderRequest" class="orderRequestGroup">Sort By:</label>
+                </div>
+            </div>
             <div id="urgentListDisplay" class="container"></div>
             <h3>Other Tasks</h3>
             <div id="otherListDisplay" class="container"></div>

@@ -21,6 +21,10 @@ h3 {
     margin: .6em 0;
 }
 
+.orderRequestGroup {
+    float: right;
+}
+
 .urgent {
     background-color: rgb(233, 193, 193);
 }

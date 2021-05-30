@@ -23,7 +23,11 @@ function clickListeners() {
 
 
 // GET request to pull todo_list table data from DB
-function getListData() {
+function getListData(orderRequest) {
+    if (!orderRequest) {
+        console.log('No order input, is it still working?');
+        
+    }
     // AJAX call to server
     $.ajax({
         method: 'GET',
