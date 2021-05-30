@@ -52,3 +52,9 @@ h3 {
 #taskInput {
     width: 70%;
 }
+
+.complete {
+    text-decoration: line-through;
+    text-decoration-thickness: .13em;
+    background-color: lightgreen;
+}
