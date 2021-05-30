@@ -15,9 +15,9 @@ function handleReady() {
 function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
     // buttons inside task divs
-    $('#listDisplay').on('click', '.completeBtn', markComplete)
+    $('#listDisplay').on('click', '.completeBtn', handleComplete)
     $('#listDisplay').on('click', '.urgentBtn', toggleUrgent);
-    $('#listDisplay').on('click', '.deleteBtn', deleteTask)
+    $('#listDisplay').on('click', '.deleteBtn', handleDelete)
 
 }
 
@@ -147,27 +147,26 @@ function submitNewTask (taskToAdd) {
 
 
 // PUT request to mark a task as complete
-function markComplete() {
-    completePopup();
+function handleComplete() {
     // save id and complete status of clicked complete button
     const id = $(this).data("id");
     const completeStatus = $(this).data("complete");
     console.log('Inside toggle complete', id, completeStatus);
     // run SweetAlert function with saved values as a popup to handle AJAX call
-    completePopup(id, completeStatus);
+    completeTaskPopup(id, completeStatus);
 }
 
-function completePopup(id, completeStatus) {
+function completeTaskPopup(id, completeStatus) {
     swal({
         title: 'Check this task off your checklist?',
         icon: 'info',
         buttons: true
     }).then(function (checkedOff) {
         if(checkedOff) {
-            swal('You accomplished something on your to-do list!!!', {
+            swal('You accomplished something on your to-do list! Way to go!', {
                 icon: 'success'
             })
-                // AJAX call to switch completeStatus to its opposite
+            // AJAX call to switch completeStatus to its opposite
             $.ajax({
                 type: 'PUT',
                 url: `/tasks/complete/${id}`,
@@ -208,20 +207,39 @@ function toggleUrgent() {
 
 
 // DELETE request to remove a task from DB
-function deleteTask() {
+function handleDelete() {
     // save id and complete status of clicked complete button
     const id = $(this).data("id");
     console.log('Inside deleteTask', id);
-    // AJAX call to request a delete of the table row in DB
-    $.ajax({
-        type: 'DELETE',
-        url: `/tasks/${id}`
-    }).then(response => {
-        console.log('Received success message from server for DELETE', response);
-        // refresh DOM with updated data
-        getListData();
-    }).catch(err => {
-        // log an error if problem communicating with server
-        alert('Something went wrong with DELETE', err);
-    });   
+    // call deletePopup with the saved id
+    deleteTaskPopup(id);
+}
+
+// p
+function deleteTaskPopup(id) {
+    swal({
+        title: 'Are you sure you want to delete this task?',
+        text: 'This cannot be undone',
+        icon: 'warning',
+        dangerMode: true,
+        buttons: [true, 'Delete']
+    }).then(function (choseDelete) {
+        if(choseDelete) {
+            swal('Task has been removed from your to-do list.', {
+                icon: 'success'
+            })
+            // AJAX call to request a delete of the table row in DB
+            $.ajax({
+                type: 'DELETE',
+                url: `/tasks/${id}`
+            }).then(response => {
+                console.log('Received success message from server for DELETE', response);
+                // refresh DOM with updated data
+                getListData();
+            }).catch(err => {
+                // log an error if problem communicating with server
+                alert('Something went wrong with DELETE', err);
+            });   
+        }
+    });
 }
