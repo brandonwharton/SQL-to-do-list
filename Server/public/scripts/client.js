@@ -9,11 +9,14 @@ function handleReady() {
     // populate existing list on load
     getListData();
     // set up click listeners
-    clickListeners();
+    eventListeners();
 }
 
-function clickListeners() {
+function eventListeners() {
+    // submit button
     $('#submitTaskBtn').on('click', handleSubmit);
+    // ordering change request
+    $('#orderRequest').on('change', orderChangeRequest)
     // buttons inside task divs
     $('#listDisplay').on('click', '.completeBtn', handleComplete)
     $('#listDisplay').on('click', '.urgentBtn', toggleUrgent);
@@ -90,6 +93,11 @@ function renderList(taskArray) {
         }
 
     });
+}
+
+// Handle request for an order change
+function orderChangeRequest() {
+    console.log($(this).val());
 }
 
 
