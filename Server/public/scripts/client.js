@@ -56,7 +56,7 @@ function renderList(taskArray) {
 
         // append lists to DOM
         $(`#${urgency}ListDisplay`).append(`
-        <div class="border rounded row ${urgency}">
+        <div class="border rounded row ${urgency} row${taskItem.id}">
             <div class="col">
                 <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
                     <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
@@ -76,7 +76,8 @@ function renderList(taskArray) {
 
         // add a completed class to anything marked as completed
         if (taskItem.complete) {
-
+            $(`.row${taskItem.id}`).addClass('complete');
+            
         }
 
     });
