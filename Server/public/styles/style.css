@@ -1,0 +1,16 @@
+body {
+    margin: 1em;
+}
+
+h1 {
+    text-align: center;
+}
+
+.urgent {
+    background-color: rgb(235, 145, 145);
+}
+
+.urgentTask {
+    font-size: 1.1em;
+    font-weight: bold;
+}

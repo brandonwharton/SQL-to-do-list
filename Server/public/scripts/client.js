@@ -46,24 +46,26 @@ function renderList(taskArray) {
         let labelText;
         if (taskItem.urgent) {
             urgency = 'urgent';
-            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Remove urgency</label>`
+            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Not urgent</label>`
         } else {
             urgency = 'other';
             labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>`
         }
         $(`#${urgency}ListDisplay`).append(`
-        <div class="border rounded row">
+        <div class="border rounded row ${urgency}">
             <div class="col">
                 <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
                     <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             </div>
-            <div class="col-8">
+            <div class="col-8 ${urgency}Task">
                 ${taskItem.task}
             </div>
             <div class="col">
                 <input class="form-check-input urgentItemCheckbox" type="checkbox" 
                 id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
                 ${labelText}
+            </div>
+            <div class="col">
                 <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
             </div>
         </div>
