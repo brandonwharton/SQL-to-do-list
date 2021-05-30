@@ -9,7 +9,12 @@ header {
 }
 
 .headerImg {
-    text-align: center;
+    width: 40%;
+    height: auto;
+}
+
+main {
+    font-family: 'Lexend', Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h3 {
