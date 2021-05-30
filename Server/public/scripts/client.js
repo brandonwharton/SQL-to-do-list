@@ -30,11 +30,11 @@ function getListData(orderRequest) {
     // set a default order request if none is provided
     if (!orderRequest) {
         orderRequest = 'ASC';
-        console.log('No request originally, default', orderRequest); 
     }
     // AJAX call to server
     $.ajax({
         method: 'GET',
+        // send an order query based on user input
         url: `/tasks?order=${orderRequest}`
     }).then(response => {
         // render task list to DOM upon retrieval
@@ -45,6 +45,7 @@ function getListData(orderRequest) {
     })
 }
 
+// Render DOM
 function renderList(taskArray) {
     // empty current lists
     $('#urgentListDisplay').empty();
