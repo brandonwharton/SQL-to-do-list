@@ -51,6 +51,7 @@ h3 {
     border:1px solid black;
 }
 
+
 .submitForm {
     margin-top: 3em;
 }
@@ -72,3 +73,36 @@ h3 {
     background-color: lightgreen;
     color: grey;
 }
+
+
+/* Attempts at dynamic button resizing: will work on this later */
+
+/* @media (min-width: 576px) {
+    .completeBtn, .urgentBtn, .deleteBtn {
+        width: 50%;
+    }
+} */
+
+
+/* @include media-breakpoint-between(sm,xl) {
+    .completeBtn, .urgentBtn, deleteBtn {
+        font-size: 1rem;
+        padding: .375rem, .75rem;
+        border-radius: .25rem;
+    }
+} */
+
+/* /* @media (min-width: 992px) {
+    .completeBtn, .urgentBtn, .deleteBtn {
+        font-size: 1rem;
+        padding: .375rem, .75rem;
+        border-radius: .25rem;
+    }
+} */
+
+/* @media (min-width: 1200px) {
+    .completeBtn, .urgentBtn, .deleteBtn {
+        font-size: .5rem;
+        padding: .175rem, .375rem;
+    }
+}  */

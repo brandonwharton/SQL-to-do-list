@@ -53,9 +53,9 @@ Style Ideas / Stretch
         - [ ] Responsive to different screen sizes
     - [x] Branch: feature-confirm-delete
         - [x] OPTION: Use SweetAlert: are you sure?
-    - [ ] Branch: feature-ordering-task-query
-        - [ ] Query Params: request to reverse order of returned todos
-            - [ ] Sort by: Oldest/Newest?
+    - [x] Branch: feature-ordering-task-query
+        - [x] Query Params: request to reverse order of returned todos
+            - [x] Sort by: Oldest/Newest?
     - [ ] Branch: feature-time-completed
         - [ ] Record when a task was completed
             - [ ] Make it pretty
