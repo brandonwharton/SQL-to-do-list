@@ -15,7 +15,7 @@ function handleReady() {
 function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
     // buttons inside task divs
-    $('#listDisplay').on('click', '.completeBtn', toggleComplete)
+    $('#listDisplay').on('click', '.completeBtn', markComplete)
     $('#listDisplay').on('click', '.urgentBtn', toggleUrgent);
     $('#listDisplay').on('click', '.deleteBtn', deleteTask)
 
@@ -88,12 +88,6 @@ function renderList(taskArray) {
     });
 }
 
-{/* <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
-${labelText} */}
-
-
-
 
 // Handle submit button logic before sending client data to POST route
 function handleSubmit() {
@@ -153,23 +147,40 @@ function submitNewTask (taskToAdd) {
 
 
 // PUT request to mark a task as complete
-function toggleComplete() {
+function markComplete() {
+    completePopup();
     // save id and complete status of clicked complete button
     const id = $(this).data("id");
     const completeStatus = $(this).data("complete");
     console.log('Inside toggle complete', id, completeStatus);
-    // AJAX call to switch completeStatus to its opposite
-    $.ajax({
-        type: 'PUT',
-        url: `/tasks/complete/${id}`,
-        data: {switchComplete: !completeStatus}
-    }).then(response => {
-        console.log('Received success message from server for complete PUT', response);
-        // refresh DOM with updated data
-        getListData();
-    }).catch(err => {
-        // log an error if problem communicating with server
-        alert('Something went wrong with complete PUT', err);
+    // run SweetAlert function with saved values as a popup to handle AJAX call
+    completePopup(id, completeStatus);
+}
+
+function completePopup(id, completeStatus) {
+    swal({
+        title: 'Check this task off your checklist?',
+        icon: 'info',
+        buttons: true
+    }).then(function (checkedOff) {
+        if(checkedOff) {
+            swal('You accomplished something on your to-do list!!!', {
+                icon: 'success'
+            })
+                // AJAX call to switch completeStatus to its opposite
+            $.ajax({
+                type: 'PUT',
+                url: `/tasks/complete/${id}`,
+                data: {switchComplete: !completeStatus}
+            }).then(response => {
+                console.log('Received success message from server for complete PUT', response);
+                // refresh DOM with updated data
+                getListData();
+            }).catch(err => {
+             // log an error if problem communicating with server
+            alert('Something went wrong with complete PUT', err);
+            });
+        }
     });
 }
 
