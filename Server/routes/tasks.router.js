@@ -5,11 +5,11 @@ const pool = require('../modules/pool');
 
 // GET
 tasksRouter.get('/', (req, res) => {
-    // set the order of sorting to request from client
+    // set the order of sorting based on request from user
     let order = req.query.order;
     console.log(order);
     
-    // query to get all data from DB, sorting by urgency first, then by newest
+    // query to get all data from DB, sorting by complete on the bottom, then by id based on user preference
     const queryText = `SELECT * FROM "todo_list" ORDER BY ("complete" = true) ASC, "id" ${order};`;
     // request table from DB
     pool.query(queryText).then(result => {
@@ -39,9 +39,10 @@ tasksRouter.post('/', (req, res) => {
     });
 });
 
+
 // PUT
 
-// route for toggling complete boolean
+// route for changing complete boolean
 tasksRouter.put('/complete/:id', (req, res) => {
     console.log('Inside complete PUT route', req.params.id, req.body);
     // query to change the complete status of a task to its opposite
@@ -91,11 +92,6 @@ tasksRouter.delete('/:id', (req, res) => {
         res.sendStatus(500);
     });
 })
-
-
-
-
-
 
 
 module.exports = tasksRouter;
