@@ -1,5 +1,4 @@
 
-
 console.log('JS Running');
 
 $(handleReady);
@@ -24,12 +23,17 @@ function eventListeners() {
 
 }
 
+// variable for holding user's ordering preference while they're on the app
+// TO DO: Save this information on the server instead
+// Pre-populate Sort By select dropdown with last choice
+let orderPreference = 'ASC';
+
 
 // GET request to pull todo_list table data from DB
 function getListData(orderRequest) {
     // set a default order request if none is provided
     if (!orderRequest) {
-        orderRequest = 'ASC';
+        orderRequest = orderPreference;
     }
     // AJAX call to server
     $.ajax({
@@ -99,7 +103,11 @@ function renderList(taskArray) {
 
 // Handle request for an order change
 function orderChangeRequest() {
+    // save the value from the selected label
     let orderRequest = $(this).val();
+    // save preference locally while still on app
+    orderPreference = orderRequest;
+    // Re-render DOM using ordering preference
     getListData(orderRequest);
 }
 
