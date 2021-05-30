@@ -1,0 +1,42 @@
+body {
+    margin: 1em;
+    background-color: rgb(128, 226, 243);
+}
+
+h1 {
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#taskInput {
+    width: 70%;
+}
+
+#submitTaskBtn {
+    background-color: #ffc107;
+    font-weight: bolder;
+    color: black;
+}
+
+.urgent {
+    background-color: rgb(233, 193, 193);
+}
+
+.urgentTask, .otherTask {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.other {
+    background-color: rgb(247, 247, 193);;
+}
+
+
+
+.completeBtn {
+    background-color: lightgreen;
+}
+
+.deleteBtn {
+    background-color: rgb(247, 93, 93);
+}

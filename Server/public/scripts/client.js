@@ -42,32 +42,46 @@ function renderList(taskArray) {
     $('#otherListDisplay').empty();
     // append all tasks to DOM in order received from DB
     taskArray.forEach(taskItem => {
+        // variables for changing classes and label text
         let urgency;
         let labelText;
+        let completed;
+        // change classes and html in append below based on urgent value
         if (taskItem.urgent) {
             urgency = 'urgent';
-            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Remove urgency</label>`
+            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Not Urgent</label>`
         } else {
             urgency = 'other';
-            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>`
+            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make Urgent</label>`
         }
+
+        // append lists to DOM
         $(`#${urgency}ListDisplay`).append(`
-        <div class="draggable">
-            <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
-                <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
-            ${taskItem.task}
-            <input class="form-check-input urgentItemCheckbox" type="checkbox" 
+        <div class="border rounded row ${urgency}">
+            <div class="col">
+                <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
+                    <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+            </div>
+            <div class="col-8 ${urgency}Task">
+                ${taskItem.task}
+            </div>
+            <div class="col">
+                <input class="form-check-input urgentItemCheckbox" type="checkbox" 
                 id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
-            ${labelText}
-            <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+                ${labelText}
+            </div>
+
         </div>
         `);
 
-        // check for urgency, change text of urgent input if already urgent
-        // if (taskItem.urgent) {
-        //     // target label for specific item to change
-        //     $(`#label${taskItem.id}`).text('Remove urgency');
-        // }
+        // add a completed class to anything marked as completed
+        if (taskItem.complete) {
+
+        }
+
     });
 
 }
