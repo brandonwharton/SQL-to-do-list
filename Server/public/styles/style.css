@@ -8,15 +8,6 @@ h1 {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#taskInput {
-    width: 70%;
-}
-
-#submitTaskBtn {
-    background-color: #ffc107;
-    font-weight: bolder;
-    color: black;
-}
 
 .urgent {
     background-color: rgb(233, 193, 193);
@@ -32,11 +23,26 @@ h1 {
 }
 
 
-
 .completeBtn {
     background-color: lightgreen;
 }
 
-.deleteBtn {
+.urgentBtn {
     background-color: rgb(247, 93, 93);
+}
+
+.deleteBtn {
+    background-color: lightgrey;
+    border:1px solid black;
+}
+
+
+#taskInput {
+    width: 70%;
+}
+
+#submitTaskBtn {
+    background-color: #ffc107;
+    font-weight: bolder;
+    color: black;
 }
