@@ -52,7 +52,7 @@ function renderList(taskArray) {
             labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>`
         }
         $(`#${urgency}ListDisplay`).append(`
-        <div class="draggable">
+        <div class="border rounded">
             <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
                 <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             ${taskItem.task}
