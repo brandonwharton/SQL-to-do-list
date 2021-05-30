@@ -12,12 +12,11 @@ function handleReady() {
 
 function clickListeners() {
     $('#submitTaskBtn').on('click', handleSubmit);
-    // complete button listener CHANGE TARGET IF SWITCH FROM UL!!
+    // buttons inside task divs
     $('#listDisplay').on('click', '.completeBtn', toggleComplete)
-    // delete button listener CHANGE TARGET WHEN SWITCH FROM UL!!
+    $('#listDisplay').on('click', '.urgentBtn', toggleUrgent);
     $('#listDisplay').on('click', '.deleteBtn', deleteTask)
-    // urgent checkbox listener for inside task body
-    $('#listDisplay').on('click', '.urgentItemCheckbox', toggleUrgent);
+
 }
 
 
@@ -63,17 +62,15 @@ function renderList(taskArray) {
                     <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             </div>
             <div class="col">
-                <button type="button" class="btn deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+                <button type="button" class="btn btn-success urgentBtn" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+                    <img src="./vendors/bootstrap-svg/exclamation-lg.svg" alt="Urgent"></button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
             </div>
             <div class="col-8 ${urgency}Task">
                 ${taskItem.task}
             </div>
-            <div class="col">
-                <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-                id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
-                ${labelText}
-            </div>
-
         </div>
         `);
 
@@ -83,8 +80,14 @@ function renderList(taskArray) {
         }
 
     });
-
 }
+
+{/* <input class="form-check-input urgentItemCheckbox" type="checkbox" 
+id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+${labelText} */}
+
+
+
 
 // Handle submit button logic before sending client data to POST route
 function handleSubmit() {
