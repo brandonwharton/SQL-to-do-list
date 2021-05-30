@@ -1,9 +1,8 @@
 Front End
-    - [ ] POST - Create a task
+    - [x] POST - Create a task
         - [x] Input method of some sort
         - [x] Urgent? 
             - [x] .prop() jquery method
-            - [ ] hide "mark urgent" if form has no text, jquery change()?  
         - [x] AJAX call
         - [x] then:
              - [x] GET request for refresh page
@@ -13,58 +12,47 @@ Front End
             - [x] task
             - [x] mark as urgent
             - [x] complete button
-  
-    - [] PUT request
-        - [ ] Complete
+    - [x] PUT request
+        - [x] Complete
             - [x] Use !complete? Make it a toggle
-            - [ ] Strikethrough/Background color change?
-                  - [ ] Task Completed!!
+            - [x] Strikethrough/Background color change?
+                  - [x] Task Completed!!
             - [x] DOM refresh
-            - [ ] SweetAlert: are you sure?
-        - [ ] Urgent? 
+            - [x] SweetAlert: are you sure?
+        - [x] Urgent? 
             - [x] If then statement to make true? Or logic in server side?
-            - [ ] hide "mark urgent" if form has no text, jquery change()?
             - [x] DOM refresh     
-            - [ ] jquery draggable? 
-
-
-    - [ ] DELETE request
-        - [ ] Use SweetAlert: are you sure?
-        - [ ] Bootstrap trash icon
-
-
+    - [x] DELETE request
+        - [x] Use SweetAlert: are you sure?
+        - [x] Bootstrap trash icon
     Maybe: 
     - [ ] Different buckets nav bar: Today, Tomorrow, by date?
         - [ ] Default: All tasks
         - [ ] Display number of tasks?
         - [ ] Choose date
-        - [ ] Drag to different areas?
-    - [ ] Separate area below for complete tasks
-        - [ ] Strikethrough?
-        - [ ] Animation: background color change few seconds, then move to complete area?
-    - [ ] Separate area above for urgent task
+    - [x] Separate area above for urgent task
 
 
 Server Side
     - [x] POST Route: send task to database
-        - [ ] Query body: 
+        - [x] Query body: 
     - [x] GET Route: retrieve data from database
         - [x] Sort by: Urgent, then DESC ID
-        - [ ] Figure out: completed on the bottom? 
+        - [x] Figure out: completed on the bottom? 
     - [x] PUT: Mark as Complete
-    - [ ] DELETE: delete by ID
-    - [ ] OPTION: Router for routes
+    - [x] DELETE: delete by ID
+    - [x] OPTION: Router for routes
 
 
 
 
 Style Ideas / Stretch
     - [ ] Branch: feature-styling-bootstrap
-        - [ ] Green complete create, delete red
-        - [ ] Inputs styled
+        - [x] Green complete create, delete red
+        - [x] Inputs styled
         - [ ] Responsive to different screen sizes
-    - [ ] Branch: feature-confirm-delete
-        - [ ] OPTION: Use SweetAlert: are you sure?
+    - [x] Branch: feature-confirm-delete
+        - [x] OPTION: Use SweetAlert: are you sure?
     - [ ] Branch: feature-ordering-task-query
         - [ ] Query Params: request to reverse order of returned todos
             - [ ] Sort by: Oldest/Newest?
