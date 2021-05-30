@@ -1,3 +1,5 @@
+
+
 console.log('JS Running');
 
 $(handleReady);
@@ -96,20 +98,54 @@ ${labelText} */}
 // Handle submit button logic before sending client data to POST route
 function handleSubmit() {
     console.log('clicked');
-    // hold data from client inputs
-    swal('Mark as urgent?');
-    let newTask = $('#taskInput').val();
-    let isUrgent = $('#urgentInputCheckbox').prop('checked');
-    // create object to send to POST function
-    let taskToAdd = {
-        task: newTask,
-        urgent: isUrgent
-    };
-    // run submitNewTask with saved object
-    submitNewTask(taskToAdd);
+    urgencyPopup();
+    // // hold data from client inputs
+    // let newTask = $('#taskInput').val();
+    // // SweetAlert popup to check for urgency of submitted task
+    // let isUrgent = urgencyPopup();
+    // console.log(isUrgent);
+    
+    // // create object to send to POST function
+    // let taskToAdd = {
+    //     task: newTask,
+    //     urgent: isUrgent
+    // };
+    // // run submitNewTask with saved object
+    // submitNewTask(taskToAdd);
     // reset input values
-    $('#taskInput').val('');
-    $('#urgentInputCheckbox').prop('checked', false);
+    // $('#taskInput').val('');
+}
+
+function urgencyPopup() {
+    swal({
+        title: 'Mark this task as urgent?',
+        text: 'Urgent tasks will appear as a higher priority than non-urgent tasks. This can be changed later.',
+        icon: 'info',
+        dangerMode: true,
+        buttons: {
+            cancel: {
+                text: `Task isn't urgent`,
+                value: false,
+                visible: true
+            },
+            confirm: {
+                text: `Make task urgent`,
+                value: true,
+            }
+        }
+    }).then( function (value) {
+        // set the text body of the task to be added
+        let newTask = $('#taskInput').val();
+        // create the task object with the text body and the value based on button clicked
+        let taskToAdd = {
+            task: newTask,
+            urgent: value
+        };
+        // run submitNewTask with saved object
+        submitNewTask(taskToAdd);
+        // clear input
+        $('#taskInput').val('');
+    })
 }
 
 
