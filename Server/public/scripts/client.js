@@ -52,14 +52,15 @@ function renderList(taskArray) {
             labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>`
         }
         $(`#${urgency}ListDisplay`).append(`
-        <li>
-            <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">Complete Task</button>
+        <div class="draggable">
+            <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
+                <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             ${taskItem.task}
             <input class="form-check-input urgentItemCheckbox" type="checkbox" 
-            id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+                id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
             ${labelText}
-            <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}">Delete Task</button>
-        </li>
+            <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+        </div>
         `);
 
         // check for urgency, change text of urgent input if already urgent
