@@ -26,7 +26,7 @@ function eventListeners() {
 // variable for holding user's list ordering preference while they're on the app
 // TO DO: Save this information on the server instead
 // Pre-populate Sort By select dropdown with last choice
-let orderPreference = 'ASC';
+let currentOrderPreference = 'ASC';
 
 
 // GET request to pull todo_list table data from DB
@@ -34,7 +34,7 @@ let orderPreference = 'ASC';
 function getListData(orderRequest) {
     // set a default list display ordering if none is provided
     if (!orderRequest) {
-        orderRequest = orderPreference;
+        orderRequest = currentOrderPreference;
     }
     // AJAX call to server
     $.ajax({
@@ -101,54 +101,68 @@ function renderList(taskArray) {
     });
 }
 
-// Handle request for an order change
+
+// Handle request for an list display ordering change
 function orderChangeRequest() {
     // save the value from the selected label
-    let orderRequest = $(this).val();
+    let newOrderRequest = $(this).val();
     // save preference locally while still on app
-    orderPreference = orderRequest;
+    currentOrderPreference = newOrderRequest;
     // Re-render DOM using ordering preference
-    getListData(orderRequest);
+    getListData(newOrderRequest);
 }
 
 
 // Handle submit button logic before sending client data to POST route
 function handleSubmit() {
-    console.log('clicked');
+    console.log('clicked submit');
+    // If input field for new task is blank, create a popup message and break out of submit function
+    if ($('#taskInput').val().length === 0) {
+        swal('Please enter a task first!');
+        return;
+    }
+
+    // run SweetAlert popup function for POST validation
     urgencyPopup();
 }
 
+
+// SweetAlert popup to take additional urgency data input from user and send data to POST route
 function urgencyPopup() {
-    // SweetAlert popup on a click
+    // SweetAlert popup on a click, checks for urgency of task being added
     swal({
         title: 'Mark this task as urgent?',
         text: 'Urgent tasks will appear as a higher priority than non-urgent tasks. This can be changed later.',
         icon: 'info',
         dangerMode: true,
         buttons: {
+            // on choosing "Task isn't urgent', pass value as false
             cancel: {
                 text: `Task isn't urgent`,
                 value: false,
                 visible: true
             },
+            // on choosing "Make task urgent", pass value as true
             confirm: {
                 text: `Make task urgent`,
                 value: true,
             }
         }
     }).then( function (value) {
+        // target the new task input element
+        let el = $('#taskInput');
         // set the text body of the task to be added
-        let newTask = $('#taskInput').val();
-        // create the task object with the text body and the value based on button clicked
+        let newTask = el.val();
+        // create the task object with the text body and the value based on popup button clicked
         let taskToAdd = {
             task: newTask,
             urgent: value
         };
-        // run submitNewTask with saved object
+        // run submitNewTask with saved object to send through POST route
         submitNewTask(taskToAdd);
-        // clear input
-        $('#taskInput').val('');
-    })
+        // clear new task input
+        el.val('');
+    });
 }
 
 
