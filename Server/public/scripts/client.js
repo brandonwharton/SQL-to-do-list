@@ -183,27 +183,32 @@ function submitNewTask (taskToAdd) {
 }
 
 
-// PUT request to mark a task as complete
+// Data validation for complete buttons before sending to PUT route
 function handleComplete() {
     // save id and complete status of clicked complete button
     const id = $(this).data("id");
     const completeStatus = $(this).data("complete");
+
     console.log('Inside toggle complete', id, completeStatus);
+
     // run SweetAlert function with saved values as a popup to handle AJAX call
     completeTaskPopup(id, completeStatus);
 }
 
+// PUT request with a SweetAlert popup for confirmation
 function completeTaskPopup(id, completeStatus) {
+    // confirm user wants to mark a task as complete before sending request
     swal({
         title: 'Check this task off your checklist?',
         icon: 'info',
         buttons: true
     }).then(function (checkedOff) {
+        // if request to mark as complete is confirmed, give a success poupup before making AJAX PUT request
         if(checkedOff) {
             swal('You accomplished something on your to-do list! Way to go!', {
                 icon: 'success'
             })
-            // AJAX call to switch completeStatus to its opposite
+            // AJAX call to switch completeStatus to true
             $.ajax({
                 type: 'PUT',
                 url: `/tasks/complete/${id}`,
@@ -223,11 +228,13 @@ function completeTaskPopup(id, completeStatus) {
 
 // PUT request to toggle the urgent property
 function toggleUrgent() {
-    // save id and complete status of clicked complete button
+    // save id and current urgency value of clicked urgent button
     const id = $(this).data("id");
     const urgentStatus = $(this).data("urgent");
+
     console.log('Inside toggle urgent', id, urgentStatus);
-    // AJAX call to switch completeStatus to its opposite
+
+    // AJAX call to switch urgent status to its opposite
     $.ajax({
         type: 'PUT',
         url: `/tasks/urgent/${id}`,
@@ -243,17 +250,19 @@ function toggleUrgent() {
 }
 
 
-// DELETE request to remove a task from DB
+// Handle delete button event
 function handleDelete() {
-    // save id and complete status of clicked complete button
+    // save id for the clicked delete button
     const id = $(this).data("id");
     console.log('Inside deleteTask', id);
-    // call deletePopup with the saved id
+    // call deletePopup with the saved id for validation
     deleteTaskPopup(id);
 }
 
-// p
+
+// Use a SweetAlert popup for confirmation before making AJAJ DELETE request
 function deleteTaskPopup(id) {
+    // confirm user wants to delete a task before sending request
     swal({
         title: 'Are you sure you want to delete this task?',
         text: 'This cannot be undone',
@@ -262,6 +271,7 @@ function deleteTaskPopup(id) {
         buttons: [true, 'Delete']
     }).then(function (choseDelete) {
         if(choseDelete) {
+            // if delete was confirmed, show visual confirmation before delete AJAX request
             swal('Task has been removed from your to-do list.', {
                 icon: 'success'
             })
