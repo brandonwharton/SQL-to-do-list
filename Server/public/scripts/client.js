@@ -23,22 +23,23 @@ function eventListeners() {
 
 }
 
-// variable for holding user's ordering preference while they're on the app
+// variable for holding user's list ordering preference while they're on the app
 // TO DO: Save this information on the server instead
 // Pre-populate Sort By select dropdown with last choice
 let orderPreference = 'ASC';
 
 
 // GET request to pull todo_list table data from DB
+// Can take in a parameter to adjust the default display ordering of tasks
 function getListData(orderRequest) {
-    // set a default order request if none is provided
+    // set a default list display ordering if none is provided
     if (!orderRequest) {
         orderRequest = orderPreference;
     }
     // AJAX call to server
     $.ajax({
         method: 'GET',
-        // send an order query based on user input
+        // send an order query based on user input for oldest or newest displayed first
         url: `/tasks?order=${orderRequest}`
     }).then(response => {
         // render task list to DOM upon retrieval
@@ -49,6 +50,7 @@ function getListData(orderRequest) {
     })
 }
 
+
 // Render DOM
 function renderList(taskArray) {
     // empty current lists
@@ -56,32 +58,31 @@ function renderList(taskArray) {
     $('#otherListDisplay').empty();
     // append all tasks to DOM in order received from DB
     taskArray.forEach(taskItem => {
-        // variables for changing classes and label text
+        // save the provided row's id for ease of use and readability
+        let id = taskItem.id;
+        // variables for dynamic classes
         let urgency;
-        let labelText;
         let completed;
-        // change classes and html in append below based on urgent value
+        // choose classes and html specifics in append below based on urgent value provided
         if (taskItem.urgent) {
             urgency = 'urgent';
-            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Not Urgent</label>`
         } else {
             urgency = 'other';
-            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make Urgent</label>`
         }
 
         // append lists to DOM
         $(`#${urgency}ListDisplay`).append(`
-        <div class="border rounded row ${urgency} row${taskItem.id}">
+        <div class="border rounded row ${urgency} row${id}">
             <div class="col">
-                <button type="button" class="btn btn-success completeBtn completeBtn${taskItem.id}" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
+                <button type="button" class="btn btn-success completeBtn completeBtn${id}" data-id="${id}" data-complete="${taskItem.complete}">
                     <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-success urgentBtn urgentBtn${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
+                <button type="button" class="btn btn-success urgentBtn urgentBtn${id}" data-id="${id}" data-urgent="${taskItem.urgent}">
                     <img src="./vendors/bootstrap-svg/exclamation-lg.svg" alt="Urgent"></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-success deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+                <button type="button" class="btn btn-success deleteBtn" data-id="${id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
             </div>
             <div class="col-8 ${urgency}Task">
                 ${taskItem.task}
@@ -89,7 +90,7 @@ function renderList(taskArray) {
         </div>
         `);
 
-        // add/remove properties to completed tasks
+        // add/remove properties to tasks that have been marked as completed
         if (taskItem.complete) {
             // Add the complete class for styling of completed task divs
             $(`.row${taskItem.id}`).addClass('complete');
@@ -97,7 +98,6 @@ function renderList(taskArray) {
             $(`.completeBtn${taskItem.id}`).remove();
             $(`.urgentBtn${taskItem.id}`).remove();
         }
-
     });
 }
 
