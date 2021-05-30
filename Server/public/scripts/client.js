@@ -97,6 +97,7 @@ ${labelText} */}
 function handleSubmit() {
     console.log('clicked');
     // hold data from client inputs
+    swal('Mark as urgent?');
     let newTask = $('#taskInput').val();
     let isUrgent = $('#urgentInputCheckbox').prop('checked');
     // create object to send to POST function
