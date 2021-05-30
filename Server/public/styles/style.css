@@ -1,16 +1,33 @@
 body {
     margin: 1em;
+    background-color: rgb(128, 226, 243);
 }
 
 h1 {
     text-align: center;
 }
 
+#submitTaskBtn {
+    background-color: rgb(189, 26, 189);
+}
+
 .urgent {
-    background-color: rgb(235, 145, 145);
+    background-color: rgb(233, 193, 193);
 }
 
 .urgentTask {
     font-size: 1.1em;
     font-weight: bold;
+}
+
+.other {
+    background-color: rgb(247, 247, 193);;
+}
+
+.completeBtn {
+    background-color: lightgreen;
+}
+
+.deleteBtn {
+    background-color: rgb(247, 93, 93);
 }

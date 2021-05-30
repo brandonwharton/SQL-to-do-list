@@ -45,13 +45,14 @@ function renderList(taskArray) {
         // variables for changing classes and label text
         let urgency;
         let labelText;
+        let completed;
         // change classes and html in append below based on urgent value
         if (taskItem.urgent) {
             urgency = 'urgent';
-            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Not urgent</label>`
+            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Not Urgent</label>`
         } else {
             urgency = 'other';
-            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>`
+            labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make Urgent</label>`
         }
 
         // append lists to DOM
@@ -70,10 +71,16 @@ function renderList(taskArray) {
                 ${labelText}
             </div>
             <div class="col">
-                <button type="button" class="btn btn-danger deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+                <button type="button" class="btn deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
             </div>
         </div>
         `);
+
+        // add a completed class to anything marked as completed
+        if (taskItem.complete) {
+
+        }
+
     });
 
 }
