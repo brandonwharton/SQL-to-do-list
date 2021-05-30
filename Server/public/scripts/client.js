@@ -42,8 +42,10 @@ function renderList(taskArray) {
     $('#otherListDisplay').empty();
     // append all tasks to DOM in order received from DB
     taskArray.forEach(taskItem => {
+        // variables for changing classes and label text
         let urgency;
         let labelText;
+        // change classes and html in append below based on urgent value
         if (taskItem.urgent) {
             urgency = 'urgent';
             labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Not urgent</label>`
@@ -51,6 +53,8 @@ function renderList(taskArray) {
             urgency = 'other';
             labelText = `<label class="form-check-label" id="label${taskItem.id}" for="${taskItem.id}">Make urgent</label>`
         }
+
+        // append lists to DOM
         $(`#${urgency}ListDisplay`).append(`
         <div class="border rounded row ${urgency}">
             <div class="col">
@@ -70,12 +74,6 @@ function renderList(taskArray) {
             </div>
         </div>
         `);
-
-        // check for urgency, change text of urgent input if already urgent
-        // if (taskItem.urgent) {
-        //     // target label for specific item to change
-        //     $(`#label${taskItem.id}`).text('Remove urgency');
-        // }
     });
 
 }
