@@ -5,17 +5,24 @@ body {
 
 h1 {
     text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#taskInput {
+    width: 70%;
 }
 
 #submitTaskBtn {
-    background-color: rgb(189, 26, 189);
+    background-color: #ffc107;
+    font-weight: bolder;
+    color: black;
 }
 
 .urgent {
     background-color: rgb(233, 193, 193);
 }
 
-.urgentTask {
+.urgentTask, .otherTask {
     font-size: 1.1em;
     font-weight: bold;
 }
@@ -23,6 +30,8 @@ h1 {
 .other {
     background-color: rgb(247, 247, 193);;
 }
+
+
 
 .completeBtn {
     background-color: lightgreen;

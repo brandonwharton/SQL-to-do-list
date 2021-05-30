@@ -62,6 +62,9 @@ function renderList(taskArray) {
                 <button type="button" class="btn btn-success completeBtn" data-id="${taskItem.id}" data-complete="${taskItem.complete}">
                     <img src="vendors/bootstrap-svg/check2-circle.svg" alt="Complete"></button>
             </div>
+            <div class="col">
+                <button type="button" class="btn deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
+            </div>
             <div class="col-8 ${urgency}Task">
                 ${taskItem.task}
             </div>
@@ -70,9 +73,7 @@ function renderList(taskArray) {
                 id="checkbox${taskItem.id}" data-id="${taskItem.id}" data-urgent="${taskItem.urgent}">
                 ${labelText}
             </div>
-            <div class="col">
-                <button type="button" class="btn deleteBtn" data-id="${taskItem.id}"><img src="vendors/bootstrap-svg/trash.svg" alt="Delete"></button>
-            </div>
+
         </div>
         `);
 

@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 // GET
 tasksRouter.get('/', (req, res) => {
     // query to get all data from DB, sorting by urgency first, then by newest
-    const queryText = `SELECT * FROM "todo_list" ORDER BY "urgent" DESC, "id" DESC;`;
+    const queryText = `SELECT * FROM "todo_list" ORDER BY "urgent" DESC, "id" ASC;`;
     // request table from DB
     pool.query(queryText).then(result => {
         console.log('GET tasks from DB to server');
