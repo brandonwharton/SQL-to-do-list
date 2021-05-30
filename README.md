@@ -20,6 +20,41 @@ The default ordering convention for both lists is to have the newest created tas
 that if the user wishes newest tasks to be listed at the top of their section. This sort-by preference only exists locally on the client,
 but persists through any in-app functions short of a full page reload. The whole task list repopulates in case of a reload as well. 
 
-## Screen Shot
+## Screen Shots
 
 ![app screenshot](/Screenshots/screenshot1.png)
+![app screenshot](/Screenshots/screenshot2.png)
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/en/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Homebrew](https://brew.sh/)
+
+## Installation
+
+1. Using provided database.sql file, use a database manager of your choice ([Postico](https://eggerapps.at/postico/)) to create a local
+database with the listed table name and structure.
+2. Begin running your local database by running `brew services start postgresql` in a terminal.
+    - Stop database by running `brew services stop postgresql` in that same terminal.
+3. Navigate to the root directory of the project in another terminal.
+4. Run `npm install` in the terminal to install dependencies locally.
+5. Run `npm start` in your terminal to start the project's local server.
+    - Stop the local server by pressing `ctrl-c`.
+6. Open a browser window and navigate to [http://localhost:5000/](http://localhost:5000/) to use the app.
+
+
+## Built With
+
+- Node.js
+- PostgreSQL
+- jQuery/Ajax
+- Express
+- Bootstrap
+- SweetAlert
+
+## Acknowledgement
+
+Thanks to [Prime Digital Academy](https://www.primeacademy.io/) for continuing to share the necessary tools and
+knowledge to get this project running, along with the members of my cohort that helped at all stages
+between planning and execution.
