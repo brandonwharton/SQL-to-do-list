@@ -40,10 +40,12 @@ h3 {
 
 .completeBtn {
     background-color: lightgreen;
+    border:1px solid black;
 }
 
 .urgentBtn {
-    background-color: rgb(247, 93, 93);
+    background-color: rgb(247, 93, 93);    
+    border:1px solid black;
 }
 
 .deleteBtn {
