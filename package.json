@@ -19,6 +19,7 @@
   "homepage": "https://github.com/brandonwharton/weekend-sql-to-do-list#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap-icons": "^1.5.0",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
     "pg": "^8.6.0"

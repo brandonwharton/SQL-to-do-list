@@ -22,10 +22,10 @@ Front End
             - [x] DOM refresh
             - [ ] SweetAlert: are you sure?
         - [ ] Urgent? 
-            - [ ] Turn into a button in list items for toggle?
-            - [ ] If then statement to make true? Or logic in server side?
+            - [x] If then statement to make true? Or logic in server side?
             - [ ] hide "mark urgent" if form has no text, jquery change()?
-            - [ ] DOM refresh      
+            - [x] DOM refresh     
+            - [ ] jquery draggable? 
 
 
     - [ ] DELETE request
