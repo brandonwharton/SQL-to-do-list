@@ -20,6 +20,7 @@ The default ordering convention for both lists is to have the newest created tas
 that if the user wishes newest tasks to be listed at the top of their section. This sort-by preference only exists locally on the client,
 but persists through any in-app functions short of a full page reload. The whole task list repopulates in case of a reload as well. 
 
+You can view this project [here](https://mighty-ocean-32824.herokuapp.com/)
 ## Screen Shots
 
 ![app screenshot](/Screenshots/screenshot1.png)
